@@ -1,5 +1,6 @@
 package spring.boot.desafio.nubank.controller;
 
+import jakarta.validation.Valid;
 import spring.boot.desafio.nubank.dto.ContatoDTO;
 import spring.boot.desafio.nubank.model.Clientes;
 import spring.boot.desafio.nubank.model.Contato;
@@ -26,7 +27,7 @@ public class ContatoController {
     private ClientesRepository clientesRepository;
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody ContatoDTO dto){
+    public ResponseEntity<?> criar(@RequestBody @Valid ContatoDTO dto){
        Optional<Clientes> clientesOpt = clientesRepository.findById(dto.getClienteId());
         if (clientesOpt.isEmpty()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado");
